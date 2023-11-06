@@ -3,3 +3,4 @@ __pycache__
 dataset
 dump
 log
+.DS_Store

@@ -10,6 +10,7 @@ import math
 import random
 import pickle
 import torch
+import time
 import os
 import torch.nn as nn
 import torch.nn.parallel
@@ -30,7 +31,7 @@ parser.add_argument("--bs", type=int, default=3)
 parser.add_argument("--cuda", action="store_true", help="enables cuda")
 parser.add_argument(
     "--ckpt",
-    default="./log/wl36_11060202/best_model_257.pt",
+    default="./log/wl10_11061049/best_model_146.pt",
     help="path load the trained network",
 )
 parser.add_argument(
@@ -42,7 +43,7 @@ parser.add_argument(
     default=1,
     help="no. of trials for taking average for the final results",
 )
-parser.add_argument("--wl", type=int, default=36, help="window length")
+parser.add_argument("--wl", type=int, default=10, help="window length")
 parser.add_argument(
     "--n",
     type=int,
@@ -54,7 +55,7 @@ parser.add_argument(
     "--save_dir",
     type=str,
     default="./dump",
-    help="directory for saving p-vaues",
+    help="directory for saving p-values",
 )
 parser.add_argument(
     "--cal_root_dir",
@@ -256,8 +257,8 @@ def checkOOD(n=opt.n):
         cal=True,
         in_dist_test=False,
         transformation_list=opt.transformation_list,
-        train_path="./dataset/train",
-        test_path="./dataset/test",
+        train_path=opt.in_test_root_dir,
+        test_path=opt.out_test_root_dir,
         split_ratios=opt.split_ratio,
     )
 
@@ -505,7 +506,6 @@ def getAUROC(in_fisher_values, out_fisher_values):
 
     from sklearn.metrics import roc_auc_score
 
-    # print("yo:", label.shape, fisher_values.shape)
     au_roc = roc_auc_score(label, fisher_values) * 100
     return au_roc
 
@@ -529,6 +529,7 @@ if __name__ == "__main__":
     for trial in range(opt.trials):
         auroc_one_trial = []
         tnr_one_trial = []
+        start = time.time()
         checkOOD()
         for i in range(opt.n):
             print("Calculating fisher-values for n: ", i + 1)
@@ -537,9 +538,20 @@ if __name__ == "__main__":
             )
             au_roc = getAUROC(in_fisher_values_per_win, out_fisher_values_per_win)
             auroc_one_trial.append(au_roc)
+            tnr = getTNR(in_fisher_values_per_win, out_fisher_values_per_win)
+            tnr_one_trial.append(tnr)
+            print("For trial: {}, n: {}, AUROC: {}".format(trial + 1, i + 1, au_roc))
+            print("For trial: {}, n: {}, TNR: {}".format(trial + 1, i + 1, tnr))
+        stop = time.time()
+        print(
+            "Average time taken for each detection in the trial: ",
+            (stop - start) / len(auroc_one_trial),
+        )
         auroc_all_trials.append(auroc_one_trial)
+        tnr_all_trials.append(tnr_one_trial)
 
     auroc_all_trials = np.array(auroc_all_trials)
+    tnr_all_trials = np.array(tnr_all_trials)
 
     print(
         "AUROC for CODiT(n=100) on {} as OOD data with window length {} is {}".format(

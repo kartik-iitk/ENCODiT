@@ -38,7 +38,7 @@ class LeNet5(nn.Module):
         self.layer4 = nn.Sequential(
             nn.Flatten(),
             nn.Linear(
-                in_features=272, out_features=128
+                in_features=64, out_features=128
             ),  # in_features 1440 for cl 18/20, 1080 for cl 16
             nn.LeakyReLU(),
         )

@@ -115,7 +115,7 @@ def test(args, model, criterion, device, test_dataloader):
 def parse_args():
     parser = argparse.ArgumentParser(description="Video Win Order Prediction")
     parser.add_argument("--mode", type=str, default="train", help="train/test")
-    parser.add_argument("--wl", type=int, default=36, help="win length")
+    parser.add_argument("--wl", type=int, default=10, help="win length")
     parser.add_argument("--gpu", type=int, default=0, help="GPU id")
     parser.add_argument("--lr", type=float, default=2e-4, help="learning rate")
     parser.add_argument("--wgtDecay", default=5e-4, type=float)
