@@ -1,6 +1,7 @@
-src/__pycache__
-__pycache__
-dataset
-dump
-log
-.DS_Store
+**/.DS_Store
+dataset/test/*
+dataset/train/*
+dynamic_window/src/__pycache__
+dynamic_window/__pycache__
+dynamic_window/dump/*
+dynamic_window/log/*

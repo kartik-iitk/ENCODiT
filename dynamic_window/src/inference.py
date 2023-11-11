@@ -66,13 +66,13 @@ parser.add_argument(
 parser.add_argument(
     "--in_test_root_dir",
     type=str,
-    default="./dataset/train/",
+    default="../dataset/train/",
     help="test data directory",
 )
 parser.add_argument(
     "--out_test_root_dir",
     type=str,
-    default="./dataset/test",
+    default="../dataset/test",
     help="test data directory",
 )
 parser.add_argument(

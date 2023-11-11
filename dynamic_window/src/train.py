@@ -147,7 +147,7 @@ def parse_args():
     parser.add_argument(
         "--train_root_dir",
         type=str,
-        default="./dataset/train",
+        default="../dataset/train",
         help="training data directory",
     )
     parser.add_argument(
@@ -159,7 +159,7 @@ def parse_args():
     parser.add_argument(
         "--test_root_dir",
         type=str,
-        default="./dataset/test",
+        default="../dataset/test",
         help="test data directory",
     )
     parser.add_argument(
