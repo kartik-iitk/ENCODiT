@@ -22,6 +22,7 @@ November, 2023
 
 - Open Terminal in the root folder of the repository.
 - Execute: `% cd ./dynamic_window`. All future commands should run from this directory only.
+- If the dataset has not been processed already, run `% python src/preprocess.py`. The video clips will be processed and saved to the `dataset` folder.
 - Create a new Conda Environment `ENCODiT` from the `environment.yml` and activate it.
-- Run, `python src/train.py` by setting appropriate window size and dimension of layer 4 of the LeNet Model. The trained model will be saved to the `log` folder.
-- From main repository directory run, `python src/inference.py` by setting appropriate window size and choosing model.
+- Run, `% python src/train.py` by setting appropriate window size and dimension of layer 4 of the LeNet Model. The trained model will be saved to the `dynamic_window/log` folder.
+- From main repository directory run, `% python src/inference.py` by setting appropriate window size and choosing model.
