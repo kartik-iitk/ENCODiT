@@ -3,7 +3,7 @@ import numpy as np
 import time
 import os
 
-DIRECTORY = "../dataset/test/"
+DIRECTORY = "./test/"
 
 if __name__ == "__main__":
     files = os.listdir(DIRECTORY)

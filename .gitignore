@@ -1,7 +1,6 @@
 **/.DS_Store
+**/__pycache__
 dataset/test/*
 dataset/train/*
-dynamic_window/src/__pycache__
-dynamic_window/__pycache__
 dynamic_window/dump/*
 dynamic_window/log/*
