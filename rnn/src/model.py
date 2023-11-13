@@ -47,10 +47,10 @@ class Attention(nn.Module):
         weighted_input = x * a.view(batch_size, step_dim, feature_dim)
         return torch.sum(weighted_input, 1)
 
-class LeNet5(nn.Module):
+class RNN(nn.Module):
 
     def __init__(self, n_classes, in_feat=720):
-        super(LeNet5, self).__init__()
+        super(RNN, self).__init__()
 
         self.layer1 = nn.Sequential(nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1),nn.Tanh())
         self.layer2 = nn.AvgPool2d(kernel_size=2)
@@ -128,7 +128,7 @@ class Regressor(nn.Module):
             in_feat = 720
         else:
             in_feat = 1440
-        self.lenet = LeNet5(n_classes=self.num_classes, in_feat=in_feat)
+        self.rnn = RNN(n_classes=self.num_classes, in_feat=in_feat)
 
         self.fc1 = nn.Linear(indim, fc1_outdim)
         self.fc2 = nn.Linear(fc1_outdim, num_classes)
@@ -145,8 +145,8 @@ class Regressor(nn.Module):
         x2 = x2.to(torch.float32)
 
         #print(x1.dtype)
-        x1 = self.lenet(x1)
-        x2 = self.lenet(x2)  # now the shape of x1 = x2 = BS X 512
+        x1 = self.rnn(x1)
+        x2 = self.rnn(x2)  # now the shape of x1 = x2 = BS X 512
         # print("x2 shape: ", x2.shape)
         x = torch.cat((x1, x2), dim=1)
         # print("x shape: ", x.shape)
