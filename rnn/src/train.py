@@ -17,7 +17,7 @@ from torchvision import transforms
 import torch.optim as optim
 from tensorboardX import SummaryWriter
 
-from lenet import Regressor as regressor
+from model import Regressor as regressor
 
 from data import GAIT
 
