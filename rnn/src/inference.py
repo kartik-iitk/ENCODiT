@@ -21,7 +21,7 @@ import itertools
 
 import numpy as np
 
-from lenet import Regressor as regressor
+from model import Regressor as regressor
 
 from data import GAIT
 parser = argparse.ArgumentParser()
