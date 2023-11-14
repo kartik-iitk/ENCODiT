@@ -4,3 +4,5 @@ dataset/test/*
 dataset/train/*
 dynamic_window/dump/*
 dynamic_window/log/*
+rnn/dump/*
+rnn/log/*
