@@ -35,5 +35,5 @@ November, 2023
 - Execute: `% cd ./rnn`. All future commands should run from this directory only.
 - If the dataset has not been processed already, run `% python src/data.py`. The video clips will be processed and saved to the `dataset` folder.
 - Create `rnn/log` and `rnn/dump` folders to save the model and the fisher values.
-- Run, `% python src/train.py` by setting appropriate window size and dimension of layer 4 of the LeNet Model. The trained model will be saved to the `rnn/log` folder.
+- Run, `% python src/train.py` by setting necessary model parameters. The trained model will be saved to the `rnn/log` folder.
 - From main repository directory run, `% python src/inference.py` by setting appropriate model.
